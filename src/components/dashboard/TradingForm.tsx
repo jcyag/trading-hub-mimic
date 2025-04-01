@@ -43,7 +43,7 @@ export function TradingForm() {
   };
 
   return (
-    <div className="bg-card rounded-lg p-5 shadow-sm h-full flex flex-col">
+    <div className="bg-card rounded-lg p-5 shadow-sm h-[600px] flex flex-col">
       <h2 className="text-lg font-semibold mb-4">Quick Trade</h2>
       
       <Tabs defaultValue="buy" onValueChange={(v) => setTradeAction(v as TradeAction)} className="flex-1 flex flex-col">
