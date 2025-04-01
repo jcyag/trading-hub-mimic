@@ -10,7 +10,7 @@ const Index = () => {
     <div className="min-h-screen bg-background text-foreground">
       <Header />
       
-      <div className="pt-24 pb-10 px-6">
+      <div className="container mx-auto pt-20 pb-10 px-4 md:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
           <div className="lg:col-span-2">
             <div className="h-full">

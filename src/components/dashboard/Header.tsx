@@ -10,11 +10,11 @@ export function Header() {
 
   return (
     <header 
-      className="fixed top-0 left-0 right-0 h-16 border-b border-border flex items-center justify-between z-30 px-4 bg-background w-full"
+      className="fixed top-0 left-0 right-0 h-16 border-b border-border flex items-center justify-between z-30 bg-background w-full px-4 md:px-6"
     >
       <div className="flex items-center w-full max-w-md relative gap-4">
         <h1 className="text-lg font-bold text-primary whitespace-nowrap">CryptoTrade</h1>
-        <div className="relative flex-1">
+        <div className="relative flex-1 hidden sm:block">
           <Search 
             size={18} 
             className={cn(
