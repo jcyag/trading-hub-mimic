@@ -68,12 +68,12 @@ export function Portfolio() {
                     dataKey="month" 
                     axisLine={false}
                     tickLine={false}
-                    tick={{ fill: '#FFFFFF', fontSize: 12 }}
+                    tick={{ fill: 'rgba(255,255,255,0.5)', fontSize: 12 }}
                   />
                   <YAxis 
                     axisLine={false}
                     tickLine={false}
-                    tick={{ fill: '#FFFFFF', fontSize: 12 }}
+                    tick={{ fill: 'rgba(255,255,255,0.5)', fontSize: 12 }}
                     tickFormatter={(value) => `$${value}`}
                     domain={['dataMin - 500', 'dataMax + 500']}
                   />
