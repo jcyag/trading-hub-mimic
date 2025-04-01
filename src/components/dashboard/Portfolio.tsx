@@ -55,12 +55,12 @@ export function Portfolio() {
           
           <div className="pt-2">
             <p className="text-sm text-muted-foreground mb-2">Balance History</p>
-            <div className="flex items-end h-[80px] gap-1">
+            <div className="flex items-end h-[120px] gap-2">
               {balanceHistory.map((item, i) => {
                 const heightPercentage = (item.balance / 10300) * 100;
                 return (
                   <div key={i} className="flex flex-col items-center flex-1">
-                    <div className="w-full bg-accent relative">
+                    <div className="w-full bg-accent/30 h-full rounded-t relative">
                       <div 
                         className={cn(
                           "absolute bottom-0 left-0 w-full bg-primary rounded-t transition-all duration-500",
@@ -69,7 +69,10 @@ export function Portfolio() {
                         style={{ height: `${heightPercentage}%` }}
                       ></div>
                     </div>
-                    <span className="text-xs text-muted-foreground mt-1">{item.month}</span>
+                    <div className="flex flex-col items-center mt-2">
+                      <span className="text-xs text-muted-foreground">{item.month}</span>
+                      <span className="text-xs font-medium">${item.balance}</span>
+                    </div>
                   </div>
                 );
               })}
