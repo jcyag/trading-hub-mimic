@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,16 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+                success: '#16c784',
+                danger: '#ea3943',
+                chart: {
+                    line: '#5470c6',
+                    gradient: {
+                        from: 'rgba(84, 112, 198, 0.2)',
+                        to: 'rgba(84, 112, 198, 0)',
+                    },
+                }
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
