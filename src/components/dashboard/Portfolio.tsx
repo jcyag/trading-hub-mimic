@@ -133,8 +133,8 @@ export function Portfolio() {
             </ResponsiveContainer>
           </div>
           
-          {/* Legend moved below the chart */}
-          <div className="flex flex-wrap justify-start gap-4 mt-2">
+          {/* Legend moved below the chart - now center aligned */}
+          <div className="flex flex-wrap justify-center gap-4 mt-2">
             {portfolioData.map((entry, index) => (
               <div key={index} className="flex items-center">
                 <div 
