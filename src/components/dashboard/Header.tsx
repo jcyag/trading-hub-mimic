@@ -17,20 +17,23 @@ export function Header({ sidebarWidth }: HeaderProps) {
       className="fixed top-0 right-0 h-16 border-b border-border flex items-center justify-between z-30 px-4 bg-background"
       style={{ width: `calc(100% - ${sidebarWidth}px)` }}
     >
-      <div className="w-full max-w-md relative">
-        <Search 
-          size={18} 
-          className={cn(
-            "absolute left-3 top-1/2 -translate-y-1/2 transition-colors",
-            searchFocused ? "text-primary" : "text-muted-foreground"
-          )} 
-        />
-        <Input
-          className="pl-10 bg-muted"
-          placeholder="Search markets..."
-          onFocus={() => setSearchFocused(true)}
-          onBlur={() => setSearchFocused(false)}
-        />
+      <div className="flex items-center w-full max-w-md relative gap-4">
+        <h1 className="text-lg font-bold text-primary whitespace-nowrap">CryptoTrade</h1>
+        <div className="relative flex-1">
+          <Search 
+            size={18} 
+            className={cn(
+              "absolute left-3 top-1/2 -translate-y-1/2 transition-colors",
+              searchFocused ? "text-primary" : "text-muted-foreground"
+            )} 
+          />
+          <Input
+            className="pl-10 bg-muted w-full"
+            placeholder="Search markets..."
+            onFocus={() => setSearchFocused(true)}
+            onBlur={() => setSearchFocused(false)}
+          />
+        </div>
       </div>
       
       <div className="flex items-center gap-4">

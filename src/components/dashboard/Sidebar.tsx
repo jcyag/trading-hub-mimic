@@ -19,9 +19,6 @@ export function Sidebar() {
       )}
     >
       <div className="flex items-center justify-between p-4 h-16 border-b border-border">
-        {!collapsed && (
-          <h1 className="text-lg font-bold text-primary">CryptoTrade</h1>
-        )}
         <button
           onClick={toggleSidebar}
           className={cn(
