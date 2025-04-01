@@ -5,17 +5,12 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
-interface HeaderProps {
-  sidebarWidth: number;
-}
-
-export function Header({ sidebarWidth }: HeaderProps) {
+export function Header() {
   const [searchFocused, setSearchFocused] = useState(false);
 
   return (
     <header 
-      className="fixed top-0 right-0 h-16 border-b border-border flex items-center justify-between z-30 px-4 bg-background"
-      style={{ width: `calc(100% - ${sidebarWidth}px)` }}
+      className="fixed top-0 left-0 right-0 h-16 border-b border-border flex items-center justify-between z-30 px-4 bg-background w-full"
     >
       <div className="flex items-center w-full max-w-md relative gap-4">
         <h1 className="text-lg font-bold text-primary whitespace-nowrap">CryptoTrade</h1>
