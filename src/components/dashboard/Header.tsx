@@ -1,33 +1,16 @@
-
 import { useState } from "react";
 import { Bell, Search } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-
 export function Header() {
   const [searchFocused, setSearchFocused] = useState(false);
-
-  return (
-    <header 
-      className="fixed top-0 left-0 right-0 h-16 border-b border-border flex items-center justify-between z-30 bg-background w-full px-4 md:px-6"
-    >
+  return <header className="fixed top-0 left-0 right-0 h-16 border-b border-border flex items-center justify-between z-30 bg-background w-full px-4 md:px-6">
       <div className="flex items-center w-full max-w-md relative gap-4">
-        <h1 className="text-lg font-bold text-primary whitespace-nowrap">CryptoTrade</h1>
+        <h1 className="text-lg font-bold text-primary whitespace-nowrap">Ai-Builder</h1>
         <div className="relative flex-1 hidden sm:block">
-          <Search 
-            size={18} 
-            className={cn(
-              "absolute left-3 top-1/2 -translate-y-1/2 transition-colors",
-              searchFocused ? "text-primary" : "text-muted-foreground"
-            )} 
-          />
-          <Input
-            className="pl-10 bg-muted w-full"
-            placeholder="Search markets..."
-            onFocus={() => setSearchFocused(true)}
-            onBlur={() => setSearchFocused(false)}
-          />
+          <Search size={18} className={cn("absolute left-3 top-1/2 -translate-y-1/2 transition-colors", searchFocused ? "text-primary" : "text-muted-foreground")} />
+          <Input className="pl-10 bg-muted w-full" placeholder="Search markets..." onFocus={() => setSearchFocused(true)} onBlur={() => setSearchFocused(false)} />
         </div>
       </div>
       
@@ -41,6 +24,5 @@ export function Header() {
           <AvatarFallback className="bg-primary text-sm">JD</AvatarFallback>
         </Avatar>
       </div>
-    </header>
-  );
+    </header>;
 }
