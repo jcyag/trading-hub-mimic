@@ -95,16 +95,21 @@ export function Portfolio() {
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
-                <Legend 
-                  layout="vertical" 
-                  verticalAlign="middle" 
-                  align="right"
-                  formatter={(value, entry, index) => (
-                    <span className="text-foreground">{value} - {portfolioData[index!].value}%</span>
-                  )}
-                />
               </PieChart>
             </ResponsiveContainer>
+          </div>
+          
+          {/* Legend moved below the chart */}
+          <div className="flex flex-wrap justify-center gap-4 mt-2">
+            {portfolioData.map((entry, index) => (
+              <div key={index} className="flex items-center">
+                <div 
+                  className="w-3 h-3 rounded-sm mr-1"
+                  style={{ backgroundColor: entry.color }}
+                />
+                <span className="text-sm text-foreground">{entry.name} - {entry.value}%</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
