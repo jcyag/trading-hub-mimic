@@ -16,9 +16,9 @@ export function MarketOverview() {
         </button>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="flex flex-col space-y-3">
         {topCryptos.map((crypto) => (
-          <CryptoCard key={crypto.symbol} {...crypto} />
+          <CryptoBar key={crypto.symbol} {...crypto} />
         ))}
       </div>
     </div>
@@ -33,30 +33,33 @@ interface CryptoCardProps {
   iconUrl: string;
 }
 
-function CryptoCard({ name, symbol, price, change, iconUrl }: CryptoCardProps) {
+function CryptoBar({ name, symbol, price, change, iconUrl }: CryptoCardProps) {
   const isPositive = change >= 0;
   
   return (
-    <div className="bg-accent rounded-lg p-4 border border-border hover:border-primary/30 transition-colors">
-      <div className="flex items-center gap-3 mb-3">
-        <div className="w-8 h-8 bg-card flex items-center justify-center rounded-full">
-          <img src={iconUrl} alt={name} className="w-5 h-5" />
+    <div className="bg-accent rounded-lg p-3 border border-border hover:border-primary/30 transition-colors">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 bg-card flex items-center justify-center rounded-full">
+            <img src={iconUrl} alt={name} className="w-5 h-5" />
+          </div>
+          <div>
+            <h3 className="font-medium">{name}</h3>
+            <p className="text-xs text-muted-foreground">{symbol}</p>
+          </div>
         </div>
-        <div>
-          <h3 className="font-medium">{name}</h3>
-          <p className="text-xs text-muted-foreground">{symbol}</p>
-        </div>
-      </div>
-      <div className="flex items-end justify-between">
-        <p className="text-lg font-semibold">${price.toLocaleString()}</p>
-        <div 
-          className={cn(
-            "flex items-center text-sm font-medium",
-            isPositive ? "text-success" : "text-danger"
-          )}
-        >
-          {isPositive ? <ArrowUp size={14} /> : <ArrowDown size={14} />}
-          <span>{Math.abs(change).toFixed(2)}%</span>
+        
+        <div className="flex flex-col items-end">
+          <p className="font-semibold">${price.toLocaleString()}</p>
+          <div 
+            className={cn(
+              "flex items-center text-sm font-medium",
+              isPositive ? "text-success" : "text-danger"
+            )}
+          >
+            {isPositive ? <ArrowUp size={14} /> : <ArrowDown size={14} />}
+            <span>{Math.abs(change).toFixed(2)}%</span>
+          </div>
         </div>
       </div>
     </div>
