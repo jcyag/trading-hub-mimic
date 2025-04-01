@@ -1,5 +1,5 @@
 
-import { Pie, PieChart, Cell, ResponsiveContainer, Legend } from "recharts";
+import { Pie, PieChart, Cell, ResponsiveContainer, Legend, LineChart, Line, XAxis, YAxis, Tooltip } from "recharts";
 import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -55,27 +55,58 @@ export function Portfolio() {
           
           <div className="pt-2">
             <p className="text-sm text-muted-foreground mb-2">Balance History</p>
-            <div className="flex items-end h-[120px] gap-2">
-              {balanceHistory.map((item, i) => {
-                const heightPercentage = (item.balance / 10300) * 100;
-                return (
-                  <div key={i} className="flex flex-col items-center flex-1">
-                    <div className="w-full bg-accent/30 h-full rounded-t relative">
-                      <div 
-                        className={cn(
-                          "absolute bottom-0 left-0 w-full bg-primary rounded-t transition-all duration-500",
-                          i === balanceHistory.length - 1 ? "bg-success" : ""
-                        )}
-                        style={{ height: `${heightPercentage}%` }}
-                      ></div>
-                    </div>
-                    <div className="flex flex-col items-center mt-2">
-                      <span className="text-xs text-muted-foreground">{item.month}</span>
-                      <span className="text-xs font-medium">${item.balance}</span>
-                    </div>
-                  </div>
-                );
-              })}
+            <div className="h-[180px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={balanceHistory} margin={{ top: 10, right: 10, left: 10, bottom: 10 }}>
+                  <defs>
+                    <linearGradient id="colorBalance" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#6366F1" stopOpacity={0.8}/>
+                      <stop offset="95%" stopColor="#6366F1" stopOpacity={0}/>
+                    </linearGradient>
+                  </defs>
+                  <XAxis 
+                    dataKey="month" 
+                    axisLine={false}
+                    tickLine={false}
+                    tick={{ fill: 'var(--muted-foreground)', fontSize: 12 }}
+                  />
+                  <YAxis 
+                    axisLine={false}
+                    tickLine={false}
+                    tick={{ fill: 'var(--muted-foreground)', fontSize: 12 }}
+                    tickFormatter={(value) => `$${value}`}
+                    domain={['dataMin - 500', 'dataMax + 500']}
+                  />
+                  <Tooltip 
+                    formatter={(value) => [`$${value}`, 'Balance']}
+                    labelFormatter={(label) => `${label}`}
+                    contentStyle={{ 
+                      backgroundColor: 'var(--card)', 
+                      borderColor: 'var(--border)',
+                      borderRadius: '0.375rem'
+                    }}
+                  />
+                  <Line 
+                    type="monotone" 
+                    dataKey="balance" 
+                    stroke="#6366F1" 
+                    strokeWidth={2}
+                    dot={{ 
+                      fill: '#6366F1', 
+                      stroke: 'var(--card)', 
+                      strokeWidth: 2,
+                      r: 4
+                    }}
+                    activeDot={{ 
+                      fill: '#6366F1',
+                      stroke: 'var(--card)',
+                      strokeWidth: 2,
+                      r: 6
+                    }}
+                    fill="url(#colorBalance)"
+                  />
+                </LineChart>
+              </ResponsiveContainer>
             </div>
           </div>
         </div>
