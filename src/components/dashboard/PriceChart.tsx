@@ -39,38 +39,23 @@ export function PriceChart() {
 
   return (
     <div className="bg-card rounded-lg p-5 shadow-sm h-full flex flex-col">
-      <div className="flex items-center justify-between mb-4">
-        <div>
+      <div className="mb-4">
+        <div className="flex items-center justify-between">
           <h2 className="text-lg font-semibold flex items-center gap-2">
             Bitcoin
             <span className="text-sm font-normal text-muted-foreground">BTC/USD</span>
           </h2>
-          <div className="flex items-center gap-2 mt-1">
-            <p className="text-2xl font-bold">${currentPrice.toLocaleString(undefined, { 
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2
-            })}</p>
-            <div 
-              className={cn(
-                "flex items-center text-sm font-medium",
-                isPositive ? "text-success" : "text-danger"
-              )}
-            >
-              {isPositive ? <ArrowUp size={14} /> : <ArrowDown size={14} />}
-              <span>{Math.abs(priceChangePercent).toFixed(2)}%</span>
-            </div>
-          </div>
+          
+          <Tabs value={selectedTimeFrame} onValueChange={(v) => setSelectedTimeFrame(v as TimeFrame)}>
+            <TabsList className="bg-accent">
+              <TabsTrigger value="1H">1H</TabsTrigger>
+              <TabsTrigger value="24H">24H</TabsTrigger>
+              <TabsTrigger value="1W">1W</TabsTrigger>
+              <TabsTrigger value="1M">1M</TabsTrigger>
+              <TabsTrigger value="1Y">1Y</TabsTrigger>
+            </TabsList>
+          </Tabs>
         </div>
-        
-        <Tabs value={selectedTimeFrame} onValueChange={(v) => setSelectedTimeFrame(v as TimeFrame)}>
-          <TabsList className="bg-accent">
-            <TabsTrigger value="1H">1H</TabsTrigger>
-            <TabsTrigger value="24H">24H</TabsTrigger>
-            <TabsTrigger value="1W">1W</TabsTrigger>
-            <TabsTrigger value="1M">1M</TabsTrigger>
-            <TabsTrigger value="1Y">1Y</TabsTrigger>
-          </TabsList>
-        </Tabs>
       </div>
       
       <div className="flex-1 w-full relative">
@@ -125,6 +110,23 @@ export function PriceChart() {
             </LineChart>
           </ResponsiveContainer>
         )}
+      </div>
+
+      {/* Price information below the chart */}
+      <div className="mt-4 flex items-center">
+        <p className="text-2xl font-bold">${currentPrice.toLocaleString(undefined, { 
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        })}</p>
+        <div 
+          className={cn(
+            "flex items-center text-sm font-medium ml-2",
+            isPositive ? "text-success" : "text-danger"
+          )}
+        >
+          {isPositive ? <ArrowUp size={14} /> : <ArrowDown size={14} />}
+          <span>{Math.abs(priceChangePercent).toFixed(2)}%</span>
+        </div>
       </div>
     </div>
   );
