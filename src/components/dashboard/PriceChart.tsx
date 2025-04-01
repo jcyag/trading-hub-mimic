@@ -38,7 +38,7 @@ export function PriceChart() {
   const isPositive = priceChange >= 0;
 
   return (
-    <div className="bg-card rounded-lg p-5 shadow-sm">
+    <div className="bg-card rounded-lg p-5 shadow-sm h-full flex flex-col">
       <div className="flex items-center justify-between mb-4">
         <div>
           <h2 className="text-lg font-semibold flex items-center gap-2">
@@ -73,7 +73,7 @@ export function PriceChart() {
         </Tabs>
       </div>
       
-      <div className="h-[300px] w-full relative">
+      <div className="flex-1 w-full relative">
         {isLoading ? (
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="animate-pulse w-full h-40 bg-accent rounded-md"></div>

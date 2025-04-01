@@ -43,109 +43,111 @@ export function TradingForm() {
   };
 
   return (
-    <div className="bg-card rounded-lg p-5 shadow-sm">
+    <div className="bg-card rounded-lg p-5 shadow-sm h-full flex flex-col">
       <h2 className="text-lg font-semibold mb-4">Quick Trade</h2>
       
-      <Tabs defaultValue="buy" onValueChange={(v) => setTradeAction(v as TradeAction)}>
+      <Tabs defaultValue="buy" onValueChange={(v) => setTradeAction(v as TradeAction)} className="flex-1 flex flex-col">
         <TabsList className="grid grid-cols-2 mb-4">
           <TabsTrigger value="buy" className="data-[state=active]:bg-success/10 data-[state=active]:text-success">Buy</TabsTrigger>
           <TabsTrigger value="sell" className="data-[state=active]:bg-danger/10 data-[state=active]:text-danger">Sell</TabsTrigger>
         </TabsList>
       
-        <form onSubmit={handleSubmit}>
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm text-muted-foreground mb-1.5">Order Type</label>
-              <div className="grid grid-cols-2 gap-2">
-                <Button 
-                  type="button"
-                  variant="outline"
-                  className={cn(
-                    orderType === "market" && "border-primary bg-primary/10"
-                  )}
-                  onClick={() => setOrderType("market")}
-                >
-                  Market
-                </Button>
-                <Button 
-                  type="button"
-                  variant="outline"
-                  className={cn(
-                    orderType === "limit" && "border-primary bg-primary/10"
-                  )}
-                  onClick={() => setOrderType("limit")}
-                >
-                  Limit
-                </Button>
-              </div>
-            </div>
-            
-            {orderType === "limit" && (
+        <form onSubmit={handleSubmit} className="flex flex-col flex-1">
+          <div className="space-y-4 flex-1 flex flex-col justify-between">
+            <div className="space-y-4">
               <div>
-                <label htmlFor="price" className="block text-sm text-muted-foreground mb-1.5">Price</label>
+                <label className="block text-sm text-muted-foreground mb-1.5">Order Type</label>
+                <div className="grid grid-cols-2 gap-2">
+                  <Button 
+                    type="button"
+                    variant="outline"
+                    className={cn(
+                      orderType === "market" && "border-primary bg-primary/10"
+                    )}
+                    onClick={() => setOrderType("market")}
+                  >
+                    Market
+                  </Button>
+                  <Button 
+                    type="button"
+                    variant="outline"
+                    className={cn(
+                      orderType === "limit" && "border-primary bg-primary/10"
+                    )}
+                    onClick={() => setOrderType("limit")}
+                  >
+                    Limit
+                  </Button>
+                </div>
+              </div>
+              
+              {orderType === "limit" && (
+                <div>
+                  <label htmlFor="price" className="block text-sm text-muted-foreground mb-1.5">Price</label>
+                  <div className="relative">
+                    <Input 
+                      id="price"
+                      value={price}
+                      onChange={(e) => setPrice(e.target.value)}
+                      className="pr-16"
+                    />
+                    <div className="absolute top-0 right-0 h-full flex items-center pr-3 text-muted-foreground">
+                      USD
+                    </div>
+                  </div>
+                </div>
+              )}
+              
+              <div>
+                <label htmlFor="amount" className="block text-sm text-muted-foreground mb-1.5">Amount</label>
                 <div className="relative">
                   <Input 
-                    id="price"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
+                    id="amount"
+                    value={amount}
+                    onChange={handleAmountChange}
                     className="pr-16"
                   />
                   <div className="absolute top-0 right-0 h-full flex items-center pr-3 text-muted-foreground">
-                    USD
+                    BTC
                   </div>
                 </div>
               </div>
-            )}
-            
-            <div>
-              <label htmlFor="amount" className="block text-sm text-muted-foreground mb-1.5">Amount</label>
-              <div className="relative">
-                <Input 
-                  id="amount"
-                  value={amount}
-                  onChange={handleAmountChange}
-                  className="pr-16"
-                />
-                <div className="absolute top-0 right-0 h-full flex items-center pr-3 text-muted-foreground">
-                  BTC
+              
+              <div>
+                <div className="flex justify-between text-xs text-muted-foreground mb-2">
+                  <span>0%</span>
+                  <span>25%</span>
+                  <span>50%</span>
+                  <span>75%</span>
+                  <span>100%</span>
                 </div>
+                <Slider
+                  value={percentage}
+                  onValueChange={handlePercentageChange}
+                  max={100}
+                  step={1}
+                  className={cn(
+                    tradeAction === "buy" ? "bg-success/10" : "bg-danger/10",
+                  )}
+                />
+              </div>
+              
+              <div className="grid grid-cols-4 gap-2">
+                {[25, 50, 75, 100].map((percent) => (
+                  <Button
+                    key={percent}
+                    type="button"
+                    variant="outline"
+                    className="text-xs h-8"
+                    onClick={() => handlePercentageChange([percent])}
+                  >
+                    {percent}%
+                  </Button>
+                ))}
               </div>
             </div>
             
-            <div>
-              <div className="flex justify-between text-xs text-muted-foreground mb-2">
-                <span>0%</span>
-                <span>25%</span>
-                <span>50%</span>
-                <span>75%</span>
-                <span>100%</span>
-              </div>
-              <Slider
-                value={percentage}
-                onValueChange={handlePercentageChange}
-                max={100}
-                step={1}
-                className={cn(
-                  tradeAction === "buy" ? "bg-success/10" : "bg-danger/10",
-                )}
-              />
-            </div>
-            
-            <div className="grid grid-cols-4 gap-2">
-              {[25, 50, 75, 100].map((percent) => (
-                <Button
-                  key={percent}
-                  type="button"
-                  variant="outline"
-                  className="text-xs h-8"
-                  onClick={() => handlePercentageChange([percent])}
-                >
-                  {percent}%
-                </Button>
-              ))}
-            </div>
-            
-            <div className="pt-2">
+            <div className="mt-auto pt-2">
               <Button 
                 type="submit"
                 className={cn(
